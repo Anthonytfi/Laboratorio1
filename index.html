@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta de Producto</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="product-card.js" defer></script>
+</head>
+<body>
+    <!-- Uso del componente product-card con atributos y estilos personalizados -->
+    <product-card 
+        title="Zapatos Nike" 
+        price="$15.00" 
+        image="img/nike.png"
+        style="--primary-color: #ff5722; --border-radius: 6px;">
+        <img slot="image" src="img/nike.png" alt="Producto">
+    </product-card>
+
+    <!-- Definición del template -->
+    <template id="product-card-template">
+        <style>
+            :host {
+                display: block;
+                font-family: Arial, sans-serif;
+                width: 80%;
+                max-width: 900px;
+                margin: 0 auto;
+                --primary-color: #007bff; /* Valor por defecto */
+                --border-radius: 8px;     /* Valor por defecto */
+            }
+            .card {
+                display: flex; /* Usar flexbox para centrar el contenido */
+                flex-direction: column;
+                align-items: center; /* Centrar horizontalmente */
+                justify-content: center; /* Centrar verticalmente */
+                background-color: #fff;
+                border-radius: var(--border-radius);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                margin: 10px 0;
+            }
+            .category {
+                background-color: var(--primary-color);
+                color: white;
+                padding: 5px 10px;
+                border-radius: 12px;
+                font-size: 12px;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+            .heart-icon {
+                color: #f5a623;
+                font-size: 16px;
+                margin-left: 10px;
+                vertical-align: middle;
+            }
+            .card h3 {
+                color: var(--primary-color);
+                font-size: 1.5em;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            .card .description {
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            .card .rating {
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            .card .rating .star {
+                color: #f5a623;
+                font-size: 16px;
+            }
+            .card .rating .star.empty {
+                color: #ccc;
+            }
+            .card .price {
+                font-size: 1.2em;
+                font-weight: bold;
+                color: #000;
+                margin-right: 20px;
+            }
+            .card .quantity {
+                display: inline-flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .card .quantity button {
+                background-color: var(--primary-color);
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 5px;
+                margin: 0 5px;
+            }
+            .card .quantity span {
+                font-size: 16px;
+                margin: 0 5px;
+            }
+            .card .add-to-cart {
+                background-color: #f5a623;
+                color: #000;
+                border: none;
+                padding: 10px 20px;
+                font-size: 14px;
+                font-weight: bold;
+                text-transform: uppercase;
+                border-radius: 25px;
+                cursor: pointer;
+                display: block;
+                margin: 0 auto;
+            }
+            .card img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin-bottom: 15px;
+            }
+            .card .image-fallback {
+                color: #666;
+                font-style: italic;
+            }
+        </style>
+        <div class="card">
+            <div class="category">Sports Store <span class="heart-icon">♥</span></div>
+            <slot name="image">
+                <span class="image-fallback">Imagen no disponible</span>
+            </slot>
+            <h3><slot name="title">Título del producto</slot></h3>
+            <p class="description">Zapatos Nike último modelo Unisex FG.</p>
+            <div class="rating">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star empty">☆</span>
+            </div>
+            <div>
+                <span class="price"><slot name="price">Precio no disponible</slot></span>
+                <div class="quantity">
+                    <button class="decrease">-</button>
+                    <span class="quantity-value">1</span>
+                    <button class="increase">+</button>
+                </div>
+            </div>
+            <button class="add-to-cart">Agregar al Carrito</button>
+        </div>
+    </template>
+</body>
+</html>
